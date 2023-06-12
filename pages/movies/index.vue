@@ -1,5 +1,6 @@
 <template>
   <MovieSearch/>
+  a
 </template>
 
 
