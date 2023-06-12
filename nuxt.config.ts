@@ -3,5 +3,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true }
   // experimental : {},
   // ssr:true,
+  ,
+  routeRules: {
+    "/spa": { ssr: false },
+    "/static": { static: true },
+    "/swr": { swr: true },
+  },
 
 })
