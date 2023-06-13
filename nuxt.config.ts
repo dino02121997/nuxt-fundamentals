@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   ,
   routeRules: {
     "/hybrid/spa": { ssr: false },
-    "/hybrid/static": { static: true },
+    "/hybrid/static": { prerender: true },
     "/hybrid/swr": { swr: true },
   },
 
