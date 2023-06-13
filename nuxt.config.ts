@@ -5,9 +5,9 @@ export default defineNuxtConfig({
   // ssr:true,
   ,
   routeRules: {
-    "/spa": { ssr: false },
-    "/static": { static: true },
-    "/swr": { swr: true },
+    "/hybrid/spa": { ssr: false },
+    "/hybrid/static": { static: true },
+    "/hybrid/swr": { swr: true },
   },
 
 })
