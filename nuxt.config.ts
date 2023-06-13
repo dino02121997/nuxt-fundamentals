@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     "/hybrid/spa": { ssr: false },
     "/hybrid/static": { prerender: true },
     "/hybrid/swr": { swr: true },
-    "/hybrid":  { prerender: true },
+    "/hybrid":  { prerender: false },
   },
 
 })
