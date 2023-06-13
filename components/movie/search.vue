@@ -2,44 +2,75 @@
   <div>
     <h1>Page Movies</h1>
     <form>
-      <input type="text" v-model="query" />
+
+      <input type="text" v-model="query" placeholder="search your movie"/>
       <button type="submit" @click.prevent="search">Search</button>
     </form>
     <ul style="display: flex; flex-wrap: wrap; gap: 10px; list-style: none">
-      <li v-for="movie in movies.Search" :key="movie.imdbID">
-        <NuxtLink :to="{ name: 'movies-id', params: { id: movie.imdbID } }">
-          <img :src="movie.Poster" :alt="movie.Title" width="100" />
-        </NuxtLink>
-      </li>
+      <MovieItem
+        v-for="movie in moviesSearch"
+        :key="movie.imdbID"
+        :movie="movie"
+      />
     </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-
 interface Movie {
   Title: string;
   Poster: string;
   imdbID: string;
 }
-interface Movies {
+interface MoviesResponse {
   Response: string;
   Search: Array<Movie>;
   totalResult: string;
 }
 const query = ref("");
-const movies  = reactive<Movies>({
-  Response: "",
-  Search: [],
-  totalResult: ""
-});
+const moviesSearch = ref<Movie[]>([]);
+// const MoviesResponse = ref<MoviesResponse>({
+//   Response: "",
+//   Search: [],
+//   totalResult: ""
+// });
 async function search() {
-  const { Search } = await $fetch(
+  const { Search } = (await $fetch(
     `https://www.omdbapi.com/?apikey=8e3f600b&s=${query.value}`
-  ) as Movies;
+  )) as MoviesResponse;
 
-  movies.Search = Search;
+  moviesSearch.value = Search;
 }
 </script>
 
-<style></style>
+<style lang="scss">
+h1{
+  text-align: center;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+  width: 60%;
+  margin: auto;
+  padding:20px;
+  
+     box-shadow: 0px 5px 6px rgba(68, 67, 67, 0.2);
+  input{
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid rgba(68, 67, 67, 0.2);
+  }
+  button{
+    width: 50%;
+    height: 30px;
+    background: #eaafaf;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+  }
+}
+</style>
